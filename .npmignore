@@ -1,14 +1,9 @@
 # PHPStorm
 .idea
 
-# dist
-src
-
 # node
 node_modules
 
 # other files
-.babelrc
 .gitignore
 .npmignore
-webpack.config.js
