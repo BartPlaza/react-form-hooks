@@ -1,5 +1,5 @@
 {
-  "name": "react-form-hooks",
+  "name": "react-forms-hooks",
   "version": "1.0.0",
   "description": "React hooks with form logic",
   "main": "build/index.js",
