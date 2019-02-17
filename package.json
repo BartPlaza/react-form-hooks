@@ -1,6 +1,6 @@
 {
   "name": "react-forms-hooks",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "React hooks with form logic",
   "main": "src/index.js",
   "author": "Bart Plaza",
