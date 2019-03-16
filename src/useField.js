@@ -1,11 +1,10 @@
-import React, {useEffect, useRef, useLayoutEffect} from 'react';
+import React, {useEffect, useRef} from 'react';
 
 const useField = (form, name, defaultValue = '', validators = []) => {
 
     const ref = useRef(null);
 
     useEffect(() => {
-        console.log('field initialized');
         form.setField(name, defaultValue);
         form.setActivity(name, true);
         if (validators.length) {
@@ -14,7 +13,7 @@ const useField = (form, name, defaultValue = '', validators = []) => {
     }, []);
 
     useEffect(() => {
-        if(ref.current && typeof form.fields[name] !== 'undefined' && form.fields[name] != ref.current.value){
+        if (ref.current && typeof form.fields[name] !== 'undefined' && form.fields[name] != ref.current.value) {
             form.setField(name, ref.current.value);
         }
     });
@@ -24,7 +23,8 @@ const useField = (form, name, defaultValue = '', validators = []) => {
         value: form.fields[name],
         error: form.errors[name],
         onChange: form.onChange,
-        ref: ref
+        setField: (value) => form.setField(name, value),
+        reference: ref
     };
 };
 

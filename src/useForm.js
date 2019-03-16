@@ -1,4 +1,4 @@
-import React, {useState, useCallback, useEffect} from 'react';
+import React, {useState} from 'react';
 import _omit from 'lodash.omit';
 
 const useForm = (submitAction) => {
@@ -7,11 +7,6 @@ const useForm = (submitAction) => {
     const [errors, setErrors] = useState({});
     const [activity, setActivates] = useState({});
     const [isSending, setIsSending] = useState(false);
-    const [isInitialized, setIsInitialized] = useState(false);
-
-    useEffect(()=>{
-        console.log('is initialized');
-    },[isInitialized]);
 
     const setField = (key, value) => {
         setFields((prevFields) => ({...prevFields, [key]: value}));
@@ -55,7 +50,7 @@ const useForm = (submitAction) => {
             const rules = activeValidators[key];
             rules.forEach((rule) => {
                 const error = rule(fields[key]);
-                if(error){
+                if (error) {
                     isValid = false;
                     setError(key, error);
                 }
@@ -68,7 +63,7 @@ const useForm = (submitAction) => {
         return Object.keys(fields).filter((key) => activity[key] === false);
     };
 
-    return {
+    const form = {
         fields: fields,
         errors: errors,
         activity: activity,
@@ -79,9 +74,9 @@ const useForm = (submitAction) => {
         setActivity: setActivity,
         onChange: onChange,
         onSubmit: onSubmit,
-        isInitialized: isInitialized,
-        setIsInitialized: setIsInitialized
     };
+
+    return form;
 };
 
 export default useForm;

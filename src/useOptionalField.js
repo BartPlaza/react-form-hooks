@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import useField from './useField';
 
-const useOptionalField = (form, name, defaultValue) => {
-    const field = useField(form, name, defaultValue);
+const useOptionalField = (form, name, defaultValue, validators = []) => {
+    const field = useField(form, name, defaultValue, validators);
 
     useEffect(() => {
-        const currentRef = field.ref.current;
+        const currentRef = field.reference.current;
         const isActive = form.activity[name];
         if (currentRef === null && isActive) {
             form.setActivity(name, false);
