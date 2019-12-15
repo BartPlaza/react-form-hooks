@@ -1,31 +1,34 @@
-import React, {useEffect, useRef} from 'react';
+import * as React from 'react';
+import {Field, Form} from "./useForm";
 
-const useField = (form, name, defaultValue = '', validators = []) => {
+const useField = (form: Form, name: string, defaultValue: string = '', validators: Array<any> = []) => {
 
-    const ref = useRef(null);
+    const ref = React.useRef(null);
 
-    useEffect(() => {
+    React.useEffect(() => {
         form.setField(name, defaultValue);
         form.setActivity(name, true);
-        if (validators.length) {
+       /* if (validators.length) {
             form.setValidator(name, validators);
-        }
+        }*/
     }, []);
 
-    useEffect(() => {
+/*    React.useEffect(() => {
         if (ref.current && typeof form.fields[name] !== 'undefined' && form.fields[name] != ref.current.value) {
             form.setField(name, ref.current.value);
         }
-    });
+    });*/
 
-    return {
+    const field: Field = {
         name: name,
         value: form.fields[name],
         error: form.errors[name],
         onChange: form.onChange,
-        setField: (value) => form.setField(name, value),
+        setField: (value: string) => form.setField(name, value),
         reference: ref
     };
+
+    return field;
 };
 
 export default useField;

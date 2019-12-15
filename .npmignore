@@ -1,9 +1,0 @@
-# PHPStorm
-.idea
-
-# node
-node_modules
-
-# other files
-.gitignore
-.npmignore

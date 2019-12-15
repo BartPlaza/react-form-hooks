@@ -2,7 +2,7 @@
   "name": "react-forms-hooks",
   "version": "1.0.2",
   "description": "React hooks with form logic",
-  "main": "src/index.js",
+  "main": "index.js",
   "author": "Bart Plaza",
   "license": "ISC",
   "dependencies": {
@@ -10,5 +10,17 @@
   },
   "peerDependencies": {
     "react": "^16.8.2"
-  }
+  },
+  "devDependencies": {
+    "@types/lodash.omit": "^4.5.6",
+    "@types/react": "^16.9.16",
+    "@types/react-dom": "^16.9.4",
+    "typescript": "^3.7.3"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "files": [
+    "/lib"
+  ]
 }
