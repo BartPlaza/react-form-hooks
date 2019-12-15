@@ -2,7 +2,7 @@
   "name": "react-forms-hooks",
   "version": "2.0.0",
   "description": "React hooks with form logic",
-  "main": "index.js",
+  "main": "lib/index.js",
   "author": "Bart Plaza",
   "license": "ISC",
   "dependencies": {

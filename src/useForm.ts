@@ -2,15 +2,6 @@ import * as React from 'react';
 import _omit from 'lodash.omit';
 
 
-export type Field = {
-    name: string
-    value: string | boolean
-    error: string
-    onChange: Function
-    setField: Function
-    reference: React.Ref<HTMLElement>
-}
-
 type Fields = {
     [key: string]: string | boolean
 }
@@ -37,14 +28,9 @@ export type Form = {
     onSubmit(event: React.FormEvent): void
 }
 
-type useFormProps = {
-    submitAction: Function
-}
+export type submitActionType = (activeFields: Fields, setIsSending: Function) => void
 
-
-const useForm = (props: useFormProps) => {
-
-    const {submitAction} = props;
+const useForm = (submitAction: submitActionType) => {
 
     const [fields, setFields] = React.useState<Fields>({});
     const [errors, setErrors] = React.useState<Errors>({});
@@ -81,7 +67,7 @@ const useForm = (props: useFormProps) => {
         /*const isValid = Object.keys(validators).length === 0 || checkIsValid();
         if (isValid) {*/
             setIsSending(true);
-            submitAction(activeFields);
+            submitAction(activeFields, setIsSending);
         //}
     };
 

@@ -1,7 +1,17 @@
 import * as React from 'react';
-import {Field, Form} from "./useForm";
+import {Form} from "./useForm";
+import {RefObject} from "react";
 
-const useField = (form: Form, name: string, defaultValue: string = '', validators: Array<any> = []) => {
+export type Field = {
+    name: string
+    value: any
+    error: string
+    onChange(event: React.FormEvent): void
+    setField: Function
+    reference: RefObject<HTMLInputElement>
+}
+
+const useField = (form: Form, name: string, defaultValue: any) => {
 
     const ref = React.useRef(null);
 
@@ -13,7 +23,7 @@ const useField = (form: Form, name: string, defaultValue: string = '', validator
         }*/
     }, []);
 
-/*    React.useEffect(() => {
+    /*React.useEffect(() => {
         if (ref.current && typeof form.fields[name] !== 'undefined' && form.fields[name] != ref.current.value) {
             form.setField(name, ref.current.value);
         }

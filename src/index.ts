@@ -1,5 +1,11 @@
 import useForm from "./useForm";
 
-import useField from "./useField";
+import useCheckboxField from './useCheckboxField';
 
-export {useForm, useField}
+import useTextField from './useTextField';
+
+import useNumberField from "./useNumberField";
+
+import useOptionalField from './useOptionalField'
+
+export {useForm, useTextField, useCheckboxField, useNumberField, useOptionalField}
