@@ -1,15 +1,14 @@
 import {useEffect} from 'react';
-import {Field} from './useField';
-import {Form} from "./useForm";
+import useField, {Field} from './useField';
+import {AllowedFieldTypes, Form} from "./useForm";
 
-const useOptionalField = (form: Form, field: Field) => {
+const useOptionalField = (form: Form, name: string, defaultValue: AllowedFieldTypes): Field<AllowedFieldTypes> => {
+
+    const field = useField(form, name, defaultValue);
 
     useEffect(() => {
-        console.log(field.reference);
         const currentRef: HTMLElement | null = field.reference && field.reference.current;
         const isActive = form.activity[field.name];
-        console.log('isActive', isActive);
-        console.log('currentRef', currentRef);
         if (currentRef === null && isActive) {
             form.setActivity(field.name, false);
         } else if (currentRef !== null && !isActive) {

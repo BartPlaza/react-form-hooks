@@ -1,9 +1,11 @@
 import * as React from 'react';
 import _omit from 'lodash.omit';
 
+export type AllowedFieldTypes = string | number | boolean
+
 
 type Fields = {
-    [key: string]: string | boolean
+    [key: string]: AllowedFieldTypes
 }
 
 type Errors = {
@@ -20,7 +22,7 @@ export type Form = {
     errors: Errors
     activity: Activity
     isSending: boolean
-    setField(key: string, value: string): void
+    setField(key: string, value: AllowedFieldTypes): void
     // setValidator(key: string, value: Array<any>): void
     setError(key: string, value: string): void
     setActivity(key: string, value: boolean): void
@@ -38,7 +40,7 @@ const useForm = (submitAction: submitActionType) => {
     // const [validators, setValidators] = React.useState<object>({});
     const [isSending, setIsSending] = React.useState<boolean>(false);
 
-    const setField = (key:string, value: string | boolean) => {
+    const setField = (key:string, value: AllowedFieldTypes) => {
         setFields((prevFields: object) => ({...prevFields, [key]: value}));
     };
 

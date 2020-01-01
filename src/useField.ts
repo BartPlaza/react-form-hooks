@@ -1,17 +1,18 @@
 import * as React from 'react';
-import {Form} from "./useForm";
-import {RefObject} from "react";
+import {AllowedFieldTypes, Form} from "./useForm";
+import {RefObject, useMemo} from "react";
 
-export type Field = {
+
+export type Field<G extends AllowedFieldTypes> = {
     name: string
-    value: any
+    value: G
     error: string
     onChange(event: React.FormEvent): void
     setField: Function
     reference: RefObject<HTMLInputElement>
 }
 
-const useField = (form: Form, name: string, defaultValue: any) => {
+const useField = (form: Form, name: string, defaultValue: AllowedFieldTypes): Field<AllowedFieldTypes> => {
 
     const ref = React.useRef(null);
 
@@ -23,22 +24,22 @@ const useField = (form: Form, name: string, defaultValue: any) => {
         }*/
     }, []);
 
-    /*React.useEffect(() => {
-        if (ref.current && typeof form.fields[name] !== 'undefined' && form.fields[name] != ref.current.value) {
-            form.setField(name, ref.current.value);
-        }
-    });*/
+    const setField = (value: string) => {
+        form.setField(name, value);
+    };
 
-    const field: Field = {
+    const field: Field<AllowedFieldTypes> = {
         name: name,
         value: form.fields[name],
         error: form.errors[name],
         onChange: form.onChange,
-        setField: (value: string) => form.setField(name, value),
+        setField: setField,
         reference: ref
     };
 
-    return field;
+    return useMemo(() => {
+        return field;
+    },[form.fields[name], form.errors[name]]);
 };
 
 export default useField;
